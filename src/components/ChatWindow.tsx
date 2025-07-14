@@ -19,9 +19,9 @@ const normalizeProduct = (raw: any): Product => ({
  
 const ChatWindow: React.FC<Props> = ({ messages }) => {
   return (
-    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-6 max-w-full">
+    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-8 max-w-full">
       {messages.map((msg, index) => (
-        <div key={index} className="w-full">
+        <div key={index} className="w-full mb-4">
           {msg.type === 'text' ? (
             <MessageBubble message={msg} />
           ) : (
