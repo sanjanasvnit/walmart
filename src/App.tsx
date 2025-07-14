@@ -117,7 +117,7 @@ function App() {
             <img
               src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
               alt="Walmart"
-              className="h-8 w-auto bg-white rounded px-2 py-1"
+              className="h-8 w-8 bg-white rounded px-1.5 py-1.5 object-contain"
             />
             <div>
               <h1 className="text-lg font-bold">Walmart Shopping Assistant</h1>

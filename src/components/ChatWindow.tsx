@@ -31,7 +31,7 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
                 <img
                   src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
                   alt="Bot Avatar"
-                  className="w-8 h-8 rounded-full object-contain flex-shrink-0 mt-1 bg-white p-1"
+                  className="w-8 h-8 rounded-full object-contain flex-shrink-0 mt-1 bg-white p-1.5"
                 />
                 {/* Product Cards Container */}
                 <div className="w-full overflow-x-auto">

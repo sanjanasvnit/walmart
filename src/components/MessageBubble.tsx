@@ -38,7 +38,7 @@ const MessageBubble: React.FC<Props> = ({ message }) => {
         <img
           src={isUser ? userAvatar : botAvatar}
           alt={`${isUser ? 'User' : 'Bot'} Avatar`}
-          className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+          className={`w-8 h-8 rounded-full flex-shrink-0 ${isUser ? 'object-cover' : 'object-contain bg-white p-1'}`}
         />
 
         {/* Bubble */}
