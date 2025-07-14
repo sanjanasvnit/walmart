@@ -13,7 +13,7 @@ type TextMessage = {
 type ProductMessage = {
   sender: 'bot'
   type: 'product'
-  content: Product
+  content: Product | Product[]
 }
 
 export type Message = TextMessage | ProductMessage
@@ -34,48 +34,74 @@ function App() {
     setMessages(prev => [...prev, { sender: 'bot', type: 'text', content: 'Finding the right product...' }])
 
     setTimeout(() => {
+      const sampleProduct = {
+        productId: '127348738',
+        name: 'Pantene Pro-V Classic Clean Shampoo, 17.9 oz/530 mL',
+        brand: 'Visit the Pantene Store',
+        category: 'Beauty > Hair Care > Shampoo > All Shampoo',
+        description: '72-HR NOURISHMENT: Provides hours of intense moisture vs. non-conditioning shampoo. Formulated with Pro-Vitamin B5 and antioxidants for healthy-looking hair.',
+        price: 4.97,
+        rating: 4.6,
+        reviewCount: 549,
+        imageUrl: 'https://i5.walmartimages.com/seo/Pantene-Pro-V-Classic-Clean-Shampoo-17-9-oz-530-mL_eb8f4a1a-144d-47ef-80a9-7b52d5fdcac7.8eb53dee1da14f8b004c91f6e3203c51.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF',
+        specifications: {
+          Brand: 'Pantene',
+          'Hair care key benefits': 'Color Protection',
+          'Hair type': 'All Hair Types',
+          'Ingredient preference': 'Alcohol-Free',
+          Size: '17.9 fl oz'
+        },
+        size_weight: '17.9 fl oz',
+        ingredients: 'Water, Sodium Lauryl Sulfate, Sodium Laureth Sulfate, ...',
+        stockStatus: 'In Stock',
+        shippingInfo: {
+          shipping: 'Shipping - Arrives today - Order within 3 hr 44 min',
+          pickup: 'Pickup - As soon as 11am - today',
+          delivery: 'Delivery - As soon as 1 hour',
+        },
+        nutritionFacts: null,
+        pricePerUnit: '27.8 ¢/fl oz',
+        discount_offers: 'Was $5.97, Now $4.97',
+        locationAvailability: 'Sacramento, 95829',
+        tags: [
+          'Color Protection',
+          'All Hair Types',
+          'Alcohol-Free',
+          '100+ bought since yesterday',
+          'Best seller',
+          'Popular pick'
+        ],
+        lastUpdated: new Date().toISOString()
+      }
+
       const productMessage: ProductMessage = {
         sender: 'bot',
         type: 'product',
-        content: {
-          productId: '127348738',
-          name: 'Pantene Pro-V Classic Clean Shampoo, 17.9 oz/530 mL',
-          brand: 'Visit the Pantene Store',
-          category: 'Beauty > Hair Care > Shampoo > All Shampoo',
-          description: '72-HR NOURISHMENT: Provides hours of intense moisture vs. non-conditioning shampoo...',
-          price: 4.97,
-          rating: 4.6,
-          reviewCount: 549,
-          imageUrl: 'https://i5.walmartimages.com/seo/Pantene-Pro-V-Classic-Clean-Shampoo-17-9-oz-530-mL_eb8f4a1a-144d-47ef-80a9-7b52d5fdcac7.8eb53dee1da14f8b004c91f6e3203c51.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF',
-          specifications: {
-            Brand: 'Pantene',
-            'Hair care key benefits': 'Color Protection',
-            'Hair type': 'All Hair Types',
-            'Ingredient preference': 'Alcohol-Free',
-            Size: '17.9 fl oz'
+        content: [
+          sampleProduct,
+          {
+            ...sampleProduct,
+            productId: '127348739',
+            name: 'Pantene Pro-V Daily Moisture Renewal Shampoo, 25.4 oz',
+            price: 6.47,
+            rating: 4.4,
+            reviewCount: 312,
+            size_weight: '25.4 fl oz',
+            pricePerUnit: '25.5 ¢/fl oz',
+            discount_offers: 'Was $7.47, Now $6.47',
+            tags: ['Daily Moisture', 'All Hair Types', 'Value Size', 'Popular pick']
           },
-          size_weight: '17.9 fl oz',
-          ingredients: 'Water, Sodium Lauryl Sulfate, Sodium Laureth Sulfate, ...',
-          stockStatus: 'In Stock',
-          shippingInfo: {
-            shipping: 'Shipping - Arrives today - Order within 3 hr 44 min',
-            pickup: 'Pickup - As soon as 11am - today',
-            delivery: 'Delivery - As soon as 1 hour',
-          },
-          nutritionFacts: null,
-          pricePerUnit: '27.8 ¢/fl oz',
-          discount_offers: 'Was , Now $4.97',
-          locationAvailability: 'Sacramento, 95829',
-          tags: [
-            'Color Protection',
-            'All Hair Types',
-            'Alcohol-Free',
-            '100+ bought since yesterday, try a subscription',
-            'Best seller',
-            'Popular pick'
-          ],
-          lastUpdated: new Date().toISOString()
-        }
+          {
+            ...sampleProduct,
+            productId: '127348740',
+            name: 'Pantene Pro-V Smooth & Sleek Shampoo, 17.9 oz',
+            price: 4.97,
+            rating: 4.5,
+            reviewCount: 428,
+            description: 'SMOOTH & SLEEK: Helps tame frizz and flyaways for smoother, more manageable hair. Formulated with argan oil for added shine.',
+            tags: ['Frizz Control', 'Smooth & Sleek', 'Argan Oil', 'Best seller']
+          }
+        ]
       }
 
       setMessages(prev => [...prev.slice(0, -1), productMessage])

@@ -25,7 +25,7 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
           {msg.type === 'text' ? (
             <MessageBubble message={msg} />
           ) : (
-            <div className="flex w-full px-4 py-3 justify-start">
+            <div className="flex w-full px-4 py-6 justify-start">
               <div className="flex items-start gap-3 flex-row">
                 {/* Bot Avatar */}
                 <img
@@ -33,8 +33,16 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
                   alt="Bot Avatar"
                   className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
                 />
-                {/* Product Card */}
-                <ProductCard data={normalizeProduct(msg.content)} />
+                {/* Product Cards Container */}
+                <div className="space-y-4">
+                  {Array.isArray(msg.content) ? (
+                    msg.content.map((product, idx) => (
+                      <ProductCard key={idx} data={normalizeProduct(product)} />
+                    ))
+                  ) : (
+                    <ProductCard data={normalizeProduct(msg.content)} />
+                  )}
+                </div>
               </div>
             </div>
           )}
