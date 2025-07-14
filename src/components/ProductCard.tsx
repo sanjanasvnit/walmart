@@ -46,7 +46,7 @@ const ProductCard: React.FC<Props> = ({ data }) => {
       <img
         src={data.imageUrl}
         alt={data.name}
-        className="w-full h-32 object-cover rounded-lg border"
+        className="w-full h-28 object-cover rounded-lg border"
       />
 
       {/* Info */}
@@ -54,27 +54,25 @@ const ProductCard: React.FC<Props> = ({ data }) => {
         {/* Title */}
         <h2 className="text-sm font-semibold text-gray-900 hover:text-[#0071CE] transition-colors line-clamp-2 leading-tight">{data.name}</h2>
 
-        {/* Price Section */}
-        <div className="space-y-1">
+        {/* Price and Rating Section */}
+        <div className="space-y-2">
           {data.discount_offers && (
             <div className="bg-red-500 text-white text-xs px-2 py-1 rounded inline-block font-bold">
               ROLLBACK ✨
             </div>
           )}
-          <div className="flex items-center gap-2">
-            <span className="text-[#0071CE] font-bold text-lg">${data.price.toFixed(2)}</span>
-            {data.discount_offers && (
-              <span className="text-gray-500 line-through text-sm">$5.97</span>
-            )}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-[#0071CE] font-bold text-lg">${data.price.toFixed(2)}</span>
+              {data.discount_offers && (
+                <span className="text-gray-500 line-through text-sm">$5.97</span>
+              )}
+            </div>
+            <span className="text-sm text-yellow-600">
+              ⭐ {data.rating} <span className="text-gray-400">({data.reviewCount})</span>
+            </span>
           </div>
           <div className="text-xs text-gray-500">{data.pricePerUnit}</div>
-        </div>
-
-        {/* Rating */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-yellow-600">
-            ⭐ {data.rating} <span className="text-gray-400">({data.reviewCount})</span>
-          </span>
         </div>
 
         {/* Description */}

@@ -25,8 +25,8 @@ const MessageBubble: React.FC<Props> = ({ message }) => {
         {/* Bubble */}
         <div
           className={`
-            px-4 py-3 text-sm rounded-2xl
-            whitespace-pre-wrap break-words w-fit
+            px-4 py-3 text-sm rounded-2xl max-w-fit
+            whitespace-pre-wrap break-words
             ${isUser ? 'bg-[#0071CE] text-white' : 'bg-[#F2F2F2] text-gray-900'}
           `}
         >
