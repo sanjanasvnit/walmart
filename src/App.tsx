@@ -23,7 +23,7 @@ function App() {
     {
       sender: 'bot',
       type: 'text',
-      content: "Hi there I'm Wally and I'm your AI shopping assistant at Walmart. I hope you're having a good day. How can I help you today?",
+      content: "Hi there! I'm your AI shopping assistant at Walmart. Save Money. Live Better. ✨ How can I help you find what you're looking for today?",
     }
   ])
 
@@ -110,6 +110,27 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen bg-[#f7f8fa]">
+      {/* Walmart Header */}
+      <div className="bg-[#0071CE] text-white px-4 py-3 shadow-md">
+        <div className="flex items-center justify-between max-w-6xl mx-auto">
+          <div className="flex items-center gap-3">
+            <img
+              src="https://logos-world.net/wp-content/uploads/2020/09/Walmart-Logo.png"
+              alt="Walmart"
+              className="h-8 w-auto bg-white rounded px-2 py-1"
+            />
+            <div>
+              <h1 className="text-lg font-bold">Walmart Shopping Assistant</h1>
+              <p className="text-xs text-blue-100">Save Money. Live Better. ✨</p>
+            </div>
+          </div>
+          <div className="text-right text-sm">
+            <div className="text-[#FFC220] font-semibold">Free Pickup & Delivery</div>
+            <div className="text-xs text-blue-100">Available on orders $35+</div>
+          </div>
+        </div>
+      </div>
+      
       <ChatWindow messages={messages} />
       <ChatInput onSend={sendMessage} />
     </div>
