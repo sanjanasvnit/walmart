@@ -19,14 +19,14 @@ const normalizeProduct = (raw: any): Product => ({
  
 const ChatWindow: React.FC<Props> = ({ messages }) => {
   return (
-    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 md:px-16 lg:px-32 space-y-4">
+    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-4 max-w-full">
       {messages.map((msg, index) => (
         <div key={index} className="w-full">
           {msg.type === 'text' ? (
             <MessageBubble message={msg} />
           ) : (
-            <div className="flex w-full px-4 py-6 justify-start">
-              <div className="flex items-start gap-3 flex-row">
+            <div className="flex w-full py-6 justify-start">
+              <div className="flex items-start gap-3 flex-row max-w-full">
                 {/* Bot Avatar */}
                 <img
                   src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
@@ -34,8 +34,8 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
                   className="w-8 h-8 rounded-full object-contain flex-shrink-0 mt-1 bg-white p-1.5"
                 />
                 {/* Product Cards Container */}
-                <div className="w-full overflow-x-auto">
-                  <div className="flex gap-4 pb-2" style={{ width: 'max-content' }}>
+                <div className="flex-1 overflow-x-auto">
+                  <div className="flex gap-4 pb-2 w-max">
                   {Array.isArray(msg.content) ? (
                     msg.content.map((product, idx) => (
                       <ProductCard key={idx} data={normalizeProduct(product)} />
