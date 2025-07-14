@@ -11,7 +11,7 @@ const MessageBubble: React.FC<Props> = ({ message }) => {
 
   // Replace with actual avatar URLs
   const userAvatar = 'https://i.pravatar.cc/40?img=3'
-  const botAvatar = 'https://i.pravatar.cc/40?img=5'
+  const botAvatar = 'https://corporate.walmart.com/content/corporate/en_us/news/2019/09/12/walmart-unveils-store-of-the-future/_jcr_content/par/image.img.jpg/1568319399421.jpg'
 
   // Function to insert line breaks when text exceeds max characters
   const formatTextWithLineBreaks = (text: string) => {

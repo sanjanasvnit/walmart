@@ -74,11 +74,6 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           )}
           <div>{data.locationAvailability}</div>
         </div>
-
-        {/* Click indicator */}
-        <div className="text-sm text-[#0071CE] font-medium mt-auto opacity-70">
-          Click to view on Walmart.com →
-        </div>
       </div>
     </div>
   )

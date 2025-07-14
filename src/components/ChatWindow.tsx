@@ -29,9 +29,9 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
               <div className="flex items-start gap-3 flex-row">
                 {/* Bot Avatar */}
                 <img
-                  src="https://i.pravatar.cc/40?img=5"
+                  src="https://logos-world.net/wp-content/uploads/2020/09/Walmart-Logo.png"
                   alt="Bot Avatar"
-                  className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
+                  className="w-8 h-8 rounded-full object-contain flex-shrink-0 mt-1 bg-white p-1"
                 />
                 {/* Product Cards Container */}
                 <div className="w-full overflow-x-auto">
