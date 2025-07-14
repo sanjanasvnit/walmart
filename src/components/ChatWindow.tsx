@@ -22,7 +22,7 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
     <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-6 max-w-full">
       {messages.map((msg, index) => (
         <div key={index} className="w-full">
-          {index > 0 && <br />}
+          <br />
           {msg.type === 'text' ? (
             <MessageBubble message={msg} />
           ) : (
