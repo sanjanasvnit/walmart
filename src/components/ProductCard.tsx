@@ -32,7 +32,7 @@ const ProductCard: React.FC<Props> = ({ data }) => {
     <div 
       onClick={handleClick}
       className="flex flex-col items-start gap-3 p-4 rounded-xl shadow-md bg-white border cursor-pointer hover:shadow-lg hover:border-[#0071CE] transition-all duration-200 transform hover:-translate-y-1 flex-shrink-0 relative"
-      style={{ width: '320px', height: '620px' }}
+      style={{ width: '320px', height: '640px' }}
     >
       {/* Walmart+ Badge */}
       {data.tags.includes('Best seller') && (
