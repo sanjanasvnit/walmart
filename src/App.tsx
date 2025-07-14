@@ -129,7 +129,9 @@ function App() {
             <div className="text-xs text-blue-100">Available on orders $35+</div>
           </div>
         </div>
+         
       </div>
+      <br/>
       
       <ChatWindow messages={messages} />
       <ChatInput onSend={sendMessage} />
