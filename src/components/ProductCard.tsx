@@ -46,7 +46,7 @@ const ProductCard: React.FC<Props> = ({ data }) => {
       <img
         src={data.imageUrl}
         alt={data.name}
-        className="w-full h-28 object-cover rounded-lg border"
+        className="w-full h-24 object-cover rounded-lg border"
       />
 
       {/* Info */}

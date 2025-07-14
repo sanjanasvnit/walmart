@@ -19,13 +19,13 @@ const normalizeProduct = (raw: any): Product => ({
  
 const ChatWindow: React.FC<Props> = ({ messages }) => {
   return (
-    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-4 max-w-full">
+    <div className="flex-1 overflow-y-auto px-4 pt-8 pb-6 space-y-6 max-w-full">
       {messages.map((msg, index) => (
         <div key={index} className="w-full">
           {msg.type === 'text' ? (
             <MessageBubble message={msg} />
           ) : (
-            <div className="flex w-full py-6 justify-start">
+            <div className="flex w-full justify-start">
               <div className="flex items-start gap-3 flex-row max-w-full">
                 {/* Bot Avatar */}
                 <img
