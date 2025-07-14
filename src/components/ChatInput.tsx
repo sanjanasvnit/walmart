@@ -17,10 +17,6 @@ const ChatInput: React.FC<Props> = ({ onSend }) => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border-t bg-white shadow-lg">
-      <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-        <span>💬</span>
-        <span>Ask about products, prices, or availability</span>
-      </div>
       <div className="flex gap-3">
         <input
           type="text"

@@ -112,26 +112,25 @@ function App() {
     <div className="flex flex-col h-screen bg-[#f7f8fa]">
       {/* Walmart Header */}
       <div className="bg-[#0071CE] text-white px-4 py-3 shadow-md">
-        <div className="flex items-center justify-between max-w-6xl mx-auto">
+        <div className="flex items-center justify-between max-w-6xl mx-auto py-2">
           <div className="flex items-center gap-3">
             <img
               src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
               alt="Walmart"
-              className="h-8 w-8 bg-white rounded px-1.5 py-1.5 object-contain"
+              className="h-10 w-10 bg-white rounded px-2 py-2 object-contain"
             />
             <div>
-              <h1 className="text-lg font-bold">Walmart Shopping Assistant</h1>
-              <p className="text-xs text-blue-100">Save Money. Live Better. ✨</p>
+              <h1 className="text-xl font-bold">Walmart Shopping Assistant</h1>
+              <p className="text-sm text-blue-100">Save Money. Live Better. ✨</p>
             </div>
           </div>
-          <div className="text-right text-sm">
+          <div className="text-right">
             <div className="text-[#FFC220] font-semibold">Free Pickup & Delivery</div>
-            <div className="text-xs text-blue-100">Available on orders $35+</div>
+            <div className="text-sm text-blue-100">Available on orders $35+</div>
           </div>
         </div>
          
       </div>
-      <br/>
       
       <ChatWindow messages={messages} />
       <ChatInput onSend={sendMessage} />
