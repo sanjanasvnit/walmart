@@ -8,7 +8,11 @@ type Props = {
 
 const ProductCard: React.FC<Props> = ({ data }) => {
   const [isSaved, setIsSaved] = useState(false)
-
+  const [showModal, setShowModal] = useState(false)
+  const [details, setDetails] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  console.log(data);
   const handleClick = () => {
     // Generate Walmart product URL - you can customize this format
     const productUrl = `https://www.walmart.com/ip/${data.productId}`
@@ -18,6 +22,31 @@ const ProductCard: React.FC<Props> = ({ data }) => {
   const handleSaveItem = (e: React.MouseEvent) => {
     e.stopPropagation()
     setIsSaved(!isSaved)
+  }
+
+  const handleDetails = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setShowModal(true)
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch(`http://localhost:3000/api/v1/product/${data.productId}`)
+      console.log(res);
+      if (!res.ok) throw new Error('Failed to fetch product details')
+      const detailData = await res.json()
+      setDetails(detailData)
+    } catch (err: any) {
+      setError(err.message || 'Unknown error')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const closeModal = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setShowModal(false)
+    setDetails(null)
+    setError(null)
   }
 
   return (
@@ -43,11 +72,17 @@ const ProductCard: React.FC<Props> = ({ data }) => {
         {isSaved ? '❤️' : '🤍'}
       </button>
       {/* Image */}
-      <img
-        src={data.imageUrl}
-        alt={data.name}
-        className="w-full h-24 object-cover rounded-lg border"
-      />
+      {data.imageUrl ? (
+        <img
+          src={data.imageUrl}
+          alt={data.name}
+          className="w-full h-24 object-cover rounded-lg border"
+        />
+      ) : (
+        <div className="w-full h-24 flex items-center justify-center bg-gray-100 rounded-lg border text-gray-400 text-xs">
+          No Image
+        </div>
+      )}
 
       {/* Info */}
       <div className="flex-1 space-y-2 w-full">
@@ -99,7 +134,36 @@ const ProductCard: React.FC<Props> = ({ data }) => {
             </span>
           ))}
         </div>
+        {/* Details Button */}
+        <button
+          onClick={handleDetails}
+          className="mt-2 px-3 py-1 bg-[#0071CE] text-white rounded-full text-xs font-semibold hover:bg-[#005ba1] transition-all"
+        >
+          Details
+        </button>
       </div>
+      {/* Modal for details */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" onClick={closeModal}>
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-700" onClick={closeModal}>✖</button>
+            {loading && <div>Loading...</div>}
+            {error && <div className="text-red-500">{error}</div>}
+            {details && (
+              <div>
+                <h2 className="text-lg font-bold mb-2">{details.name}</h2>
+                <img src={details.imageUrl} alt={details.name} className="w-40 h-40 object-cover rounded mb-2" />
+                <p className="mb-2">{details.description}</p>
+                <div className="mb-2">Price: <span className="font-semibold">${details.price.toFixed(2)}</span></div>
+                <div className="mb-2">Rating: <span className="font-semibold">{details.rating}</span> ({details.reviewCount} reviews)</div>
+                <div className="mb-2">Stock: <span className="font-semibold">{details.stockStatus}</span></div>
+                <div className="mb-2">Tags: {details.tags.join(', ')}</div>
+                {/* Add more details as needed */}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

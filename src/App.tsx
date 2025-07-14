@@ -31,81 +31,50 @@ function App() {
     const userMessage: TextMessage = { sender: 'user', type: 'text', content: text }
     setMessages(prev => [...prev, userMessage])
 
+    // Show a loading message while waiting for the backend
     setMessages(prev => [...prev, { sender: 'bot', type: 'text', content: 'Finding the right product...' }])
 
-    setTimeout(() => {
-      const sampleProduct = {
-        productId: '127348738',
-        name: 'Pantene Pro-V Classic Clean Shampoo, 17.9 oz/530 mL',
-        brand: 'Visit the Pantene Store',
-        category: 'Beauty > Hair Care > Shampoo > All Shampoo',
-        description: '72-HR NOURISHMENT: Provides hours of intense moisture vs. non-conditioning shampoo. Formulated with Pro-Vitamin B5 and antioxidants for healthy-looking hair.',
-        price: 4.97,
-        rating: 4.6,
-        reviewCount: 549,
-        imageUrl: 'https://i5.walmartimages.com/seo/Pantene-Pro-V-Classic-Clean-Shampoo-17-9-oz-530-mL_eb8f4a1a-144d-47ef-80a9-7b52d5fdcac7.8eb53dee1da14f8b004c91f6e3203c51.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF',
-        specifications: {
-          Brand: 'Pantene',
-          'Hair care key benefits': 'Color Protection',
-          'Hair type': 'All Hair Types',
-          'Ingredient preference': 'Alcohol-Free',
-          Size: '17.9 fl oz'
-        },
-        size_weight: '17.9 fl oz',
-        ingredients: 'Water, Sodium Lauryl Sulfate, Sodium Laureth Sulfate, ...',
-        stockStatus: 'In Stock',
-        shippingInfo: {
-          shipping: 'Shipping - Arrives today - Order within 3 hr 44 min',
-          pickup: 'Pickup - As soon as 11am - today',
-          delivery: 'Delivery - As soon as 1 hour',
-        },
-        nutritionFacts: null,
-        pricePerUnit: '27.8 ¢/fl oz',
-        discount_offers: 'Was $5.97, Now $4.97',
-        locationAvailability: 'Sacramento, 95829',
-        tags: [
-          'Color Protection',
-          'All Hair Types',
-          'Alcohol-Free',
-          '100+ bought since yesterday',
-          'Best seller',
-          'Popular pick'
-        ],
-        lastUpdated: new Date().toISOString()
+    try {
+      const res = await fetch('http://localhost:3000/api/v1/retrieve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: "any", query: text }),
+      })
+      const data = await res.json()
+console.log("data:",data);
+      // Remove the loading message
+      setMessages(prev => {
+        const withoutLoading = prev.filter(
+          m => !(m.sender === 'bot' && m.type === 'text' && m.content === 'Finding the right product...')
+        )
+        return withoutLoading
+      })
+
+      // Add assistant chat reply
+      if (data.chat) {
+        setMessages(prev => [...prev, { sender: 'bot', type: 'text', content: data.chat }])
       }
 
-      const productMessage: ProductMessage = {
-        sender: 'bot',
-        type: 'product',
-        content: [
-          sampleProduct,
-          {
-            ...sampleProduct,
-            productId: '127348739',
-            name: 'Pantene Pro-V Daily Moisture Renewal Shampoo, 25.4 oz',
-            price: 6.47,
-            rating: 4.4,
-            reviewCount: 312,
-            size_weight: '25.4 fl oz',
-            pricePerUnit: '25.5 ¢/fl oz',
-            discount_offers: 'Was $7.47, Now $6.47',
-            tags: ['Daily Moisture', 'All Hair Types', 'Value Size', 'Popular pick']
-          },
-          {
-            ...sampleProduct,
-            productId: '127348740',
-            name: 'Pantene Pro-V Smooth & Sleek Shampoo, 17.9 oz',
-            price: 4.97,
-            rating: 4.5,
-            reviewCount: 428,
-            description: 'SMOOTH & SLEEK: Helps tame frizz and flyaways for smoother, more manageable hair. Formulated with argan oil for added shine.',
-            tags: ['Frizz Control', 'Smooth & Sleek', 'Argan Oil', 'Best seller']
+      // Add product cards for selectedProducts only
+      if (data.selectedProducts && Array.isArray(data.selectedProducts) && data.selectedProducts.length > 0) {
+        // Fetch product details for each selected productId
+        Promise.all(
+          data.selectedProducts.map((id: string) =>
+            fetch(`http://localhost:3000/api/v1/product/${id}`)
+              .then(res => res.ok ? res.json() : null)
+              .catch(() => null)
+          )
+        ).then((products: any[]) => {
+          // Filter out failed fetches
+          const validProducts = products.filter(Boolean)
+          if (validProducts.length > 0) {
+            setMessages(prev => [...prev, { sender: 'bot', type: 'product', content: validProducts }])
           }
-        ]
+        })
       }
-
-      setMessages(prev => [...prev.slice(0, -1), productMessage])
-    }, 1500)
+    } catch (err) {
+      setMessages(prev => [...prev, { sender: 'bot', type: 'text', content: 'Sorry, there was an error retrieving products.' }])
+    }
   }
 
   return (
