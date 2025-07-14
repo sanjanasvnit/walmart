@@ -83,7 +83,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen bg-[#f7f8fa]">
       <ChatWindow messages={messages} />
       <ChatInput onSend={sendMessage} />
     </div>

@@ -7,8 +7,7 @@ type Props = {
 }
 
 const ProductCard: React.FC<Props> = ({ data }) => {
-  return (<>
-  <br/>
+  return (
     <div className="flex flex-col md:flex-row items-start gap-4 p-4 rounded-xl shadow-md bg-white border w-full max-w-[90%]">
       {/* Image */}
       <img
@@ -24,7 +23,7 @@ const ProductCard: React.FC<Props> = ({ data }) => {
 
         {/* Price + Rating */}
         <div className="flex items-center justify-between">
-          <span className="text-purple-600 font-bold text-xl">${data.price.toFixed(2)}</span>
+          <span className="text-[#0071CE] font-bold text-xl">${data.price.toFixed(2)}</span>
           <span className="text-sm text-yellow-600">
             ⭐ {data.rating} <span className="text-gray-500">({data.reviewCount} reviews)</span>
           </span>
@@ -40,7 +39,7 @@ const ProductCard: React.FC<Props> = ({ data }) => {
           {data.tags.slice(0, 4).map((tag, index) => (
             <span
               key={index}
-              className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full"
+              className="bg-[#FFC220] text-[#004c91] text-xs px-2 py-1 rounded-full font-medium"
             >
               {tag}
             </span>
@@ -67,8 +66,6 @@ const ProductCard: React.FC<Props> = ({ data }) => {
         </div>
       </div>
     </div>
-    <br/>
-    </>
   )
 }
 
