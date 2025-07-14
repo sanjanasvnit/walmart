@@ -24,6 +24,11 @@ const MessageBubble: React.FC<Props> = ({ message }) => {
 
         {/* Bubble */}
         <div
+          style={{
+            lineHeight: "1.8rem",
+            paddingLeft: "2.5ch",
+            paddingRight: "2.5ch",
+          }}
           className={`
             px-4 py-3 text-sm rounded-2xl max-w-fit
             whitespace-pre-wrap break-words
