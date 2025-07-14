@@ -34,7 +34,8 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
                   className="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1"
                 />
                 {/* Product Cards Container */}
-                <div className="space-y-4">
+                <div className="w-full overflow-x-auto">
+                  <div className="flex gap-4 pb-2" style={{ width: 'max-content' }}>
                   {Array.isArray(msg.content) ? (
                     msg.content.map((product, idx) => (
                       <ProductCard key={idx} data={normalizeProduct(product)} />
@@ -42,6 +43,7 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
                   ) : (
                     <ProductCard data={normalizeProduct(msg.content)} />
                   )}
+                  </div>
                 </div>
               </div>
             </div>
