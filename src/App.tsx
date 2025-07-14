@@ -115,7 +115,7 @@ function App() {
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           <div className="flex items-center gap-3">
             <img
-              src="https://logos-world.net/wp-content/uploads/2020/09/Walmart-Logo.png"
+              src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
               alt="Walmart"
               className="h-8 w-auto bg-white rounded px-2 py-1"
             />

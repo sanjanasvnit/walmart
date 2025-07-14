@@ -29,7 +29,7 @@ const ChatWindow: React.FC<Props> = ({ messages }) => {
               <div className="flex items-start gap-3 flex-row">
                 {/* Bot Avatar */}
                 <img
-                  src="https://logos-world.net/wp-content/uploads/2020/09/Walmart-Logo.png"
+                  src="https://icon-library.com/images/2018/606841_walmart-imagenes-del-logo-de-walmart-png-download.png"
                   alt="Bot Avatar"
                   className="w-8 h-8 rounded-full object-contain flex-shrink-0 mt-1 bg-white p-1"
                 />
